@@ -2,8 +2,6 @@
 
 This repository contains the example for the E2E test section of the Software Quality and Project Development course at the University of Catania: a small Flask web app and the Playwright tests that drive it from a real browser.
 
-- 📄 [Slides](https://slides.com/stefanoborzi/sqpd)
-
 ### Setup
 
 ```bash
