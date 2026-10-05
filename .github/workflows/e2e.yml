@@ -10,12 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
+        with: { python-version: "3.13" }
       - run: pip install -r requirements.txt
-      - run: python -m playwright install --with-deps chromium
+      - run: playwright install --with-deps chromium
       - run: flask --app app run &
-      - run: curl --retry 10 --retry-connrefused --retry-delay 1 http://127.0.0.1:5000/login
+      - run: >
+          curl --retry 10 --retry-connrefused
+          127.0.0.1:5000
       - run: pytest --tracing retain-on-failure
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

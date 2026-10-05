@@ -7,7 +7,8 @@ from pages.login_page import LoginPage
 scenarios("features/login.feature")
 
 
-@given("I am on the login page", target_fixture="login_page")
+@given("I am on the login page",
+       target_fixture="login_page")
 def open_login_page(page: Page) -> LoginPage:
     login_page = LoginPage(page)
     login_page.goto()
@@ -15,13 +16,18 @@ def open_login_page(page: Page) -> LoginPage:
 
 
 @when(
-    parsers.parse('I log in as "{username}" with password "{password}"'),
-    target_fixture="exams_page",
+    parsers.parse(
+        'I log in as "{username}" '
+        'with password "{password}"'
+    )
 )
-def log_in(login_page: LoginPage, username: str, password: str) -> ExamsPage:
-    return login_page.login(username, password)
+def log_in(
+    login_page: LoginPage, username: str, password: str
+) -> None:
+    login_page.login(username, password)
 
 
 @then(parsers.parse('I see the greeting "{text}"'))
-def see_greeting(exams_page: ExamsPage, text: str) -> None:
+def see_greeting(page: Page, text: str) -> None:
+    exams_page = ExamsPage(page)
     expect(exams_page.greeting).to_have_text(text)
