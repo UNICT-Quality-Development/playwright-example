@@ -9,7 +9,7 @@ git clone https://github.com/UNICT-Quality-Development/playwright-example
 cd playwright-example
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements_dev.txt
 playwright install chromium
 ```
 

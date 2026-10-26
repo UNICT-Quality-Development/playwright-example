@@ -28,13 +28,13 @@ LOGIN_PAGE = STYLE + """
 <title>Student portal</title>
 <main>
   <h1>Student portal</h1>
-  {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+  {% if error %}<p role="alert" data-testid="login-error">{{ error }}</p>{% endif %}
   <form method="post">
     <label for="username">Username</label>
-    <input id="username" name="username">
+    <input id="username" name="username" data-testid="username-input">
     <label for="password">Password</label>
-    <input id="password" name="password" type="password">
-    <button type="submit">Log in</button>
+    <input id="password" name="password" type="password" data-testid="password-input">
+    <button type="submit" data-testid="login-button">Log in</button>
   </form>
 </main>
 """
@@ -42,7 +42,7 @@ LOGIN_PAGE = STYLE + """
 EXAMS_PAGE = STYLE + """
 <title>My exams</title>
 <main>
-  <h1>Welcome, {{ name }}</h1>
+  <h1 data-testid="greeting">Welcome, {{ name }}</h1>
   <table>
     <thead><tr><th>Exam</th><th>Grade</th></tr></thead>
     <tbody>
@@ -52,7 +52,7 @@ EXAMS_PAGE = STYLE + """
     </tbody>
   </table>
   <form method="post" action="{{ url_for('logout') }}">
-    <button type="submit">Log out</button>
+    <button type="submit" data-testid="logout-button">Log out</button>
   </form>
 </main>
 """
@@ -67,10 +67,16 @@ def index():
 def login():
     if request.method == "GET":
         return render_template_string(LOGIN_PAGE)
+
     username = request.form.get("username", "")
     user = USERS.get(username)
+
     if user is None or user["password"] != request.form.get("password"):
-        return render_template_string(LOGIN_PAGE, error="Invalid username or password"), 401
+        return (
+            render_template_string(LOGIN_PAGE, error="Invalid username or password"),
+            401,
+        )
+
     session["username"] = username
     return redirect(url_for("exams"))
 
@@ -80,6 +86,7 @@ def exams():
     username = session.get("username")
     if username is None:
         return redirect(url_for("login"))
+
     return render_template_string(
         EXAMS_PAGE, name=USERS[username]["name"], exams=EXAMS[username]
     )

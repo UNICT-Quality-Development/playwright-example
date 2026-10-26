@@ -7,23 +7,15 @@ from pages.login_page import LoginPage
 scenarios("features/login.feature")
 
 
-@given("I am on the login page",
-       target_fixture="login_page")
+@given("I am on the login page", target_fixture="login_page")
 def open_login_page(page: Page) -> LoginPage:
     login_page = LoginPage(page)
     login_page.goto()
     return login_page
 
 
-@when(
-    parsers.parse(
-        'I log in as "{username}" '
-        'with password "{password}"'
-    )
-)
-def log_in(
-    login_page: LoginPage, username: str, password: str
-) -> None:
+@when(parsers.parse('I log in as "{username}" ' 'with password "{password}"'))
+def log_in(login_page: LoginPage, username: str, password: str) -> None:
     login_page.login(username, password)
 
 
