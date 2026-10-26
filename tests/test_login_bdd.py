@@ -23,3 +23,8 @@ def log_in(login_page: LoginPage, username: str, password: str) -> None:
 def see_greeting(page: Page, text: str) -> None:
     exams_page = ExamsPage(page)
     expect(exams_page.greeting).to_have_text(text)
+
+
+@then(parsers.parse('I see the error "{text}"'))
+def see_error(login_page: LoginPage, text: str) -> None:
+    expect(login_page.error).to_have_text(text)
