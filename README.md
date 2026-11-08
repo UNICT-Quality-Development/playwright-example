@@ -64,3 +64,10 @@ playwright codegen --target python-pytest 127.0.0.1:5000/login
 ```bash
 playwright show-trace test-results/<test-folder>/trace.zip
 ```
+
+### Laboratory exercises
+
+Write each exercise as a Playwright test in the `tests` folder and run it with `pytest` while the app is running.
+
+1. **Contact email.** Go to the Contact page and verify that the student office email is shown on the page and that it is `student.office@example.com`.
+2. **Student ID.** Log in as `mario`, go to the Profile page and verify that the student ID is shown on the page and that it is `1000012345`.
