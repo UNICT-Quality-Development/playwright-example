@@ -21,6 +21,16 @@ flask --app app run
 
 The app runs on http://127.0.0.1:5000. Log in with the test user `mario`, password `password123`.
 
+| Page       | Login required | What it does                                                 |
+| ---------- | -------------- | ------------------------------------------------------------ |
+| `/login`   | no             | Login form                                                   |
+| `/contact` | no             | Student office contacts and office hours                     |
+| `/exams`   | yes            | Passed exams with their grades                               |
+| `/booking` | yes            | Book or cancel upcoming exams (one of them is full)          |
+| `/profile` | yes            | Student details and a settings form with server-side checks  |
+
+Opening a page that needs login without being logged in redirects to `/login`. Bookings and profile settings are kept in the session cookie, so every new browser context (and every test) starts from a clean state.
+
 ### Run the tests
 
 Keep the app running and open a second terminal:
