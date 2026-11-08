@@ -4,12 +4,15 @@ from playwright.sync_api import Page, expect
 
 
 def test_login(page: Page) -> None:
+    # arrange
     page.goto("/login")
     page.get_by_label("Username").fill("mario")
     page.get_by_label("Password").fill("password123")
 
+    # act
     page.get_by_role("button", name="Log in").click()
 
+    # assert
     expect(page.get_by_role("heading", name="Welcome, Mario")).to_be_visible()
 
 

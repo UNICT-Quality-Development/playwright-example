@@ -7,11 +7,15 @@ from pages.login_page import LoginPage
 
 
 def test_login(page: Page) -> None:
+    # arrange
     login_page = LoginPage(page)
+    exams_page = ExamsPage(page)
     login_page.goto()
+
+    # act
     login_page.login("mario", "password123")
 
-    exams_page = ExamsPage(page)
+    # assert
     expect(exams_page.greeting).to_have_text("Welcome, Mario")
 
 
@@ -29,10 +33,14 @@ def test_wrong_password(page: Page) -> None:
 
 
 def test_exams_after_login(page: Page) -> None:
+    # arrange
     login_page = LoginPage(page)
+    exams_page = ExamsPage(page)
     login_page.goto()
+
+    # act
     login_page.login("mario", "password123")
 
-    exams_page = ExamsPage(page)
+    # assert
     expect(exams_page.greeting).to_have_text("Welcome, Mario")
     expect(exams_page.rows).to_have_count(3)
