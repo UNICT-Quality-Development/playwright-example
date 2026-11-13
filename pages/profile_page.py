@@ -9,4 +9,4 @@ class ProfilePage:
         self.degree_course = page.get_by_test_id("profile-degree")
 
     def goto(self):
-        self.page.goto('/profile')
+        self.page.goto("/profile")
