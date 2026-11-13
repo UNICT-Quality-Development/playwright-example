@@ -69,5 +69,7 @@ playwright show-trace test-results/<test-folder>/trace.zip
 
 Write each exercise as a Playwright test in the `tests` folder and run it with `pytest` while the app is running.
 
+Both exercises must be implemented using the Page Object pattern and the BDD pattern: add a page object for each page you use in the `pages` folder, describe the scenario in a `.feature` file in `tests/features` and implement its steps with `pytest-bdd` on top of the page objects. `tests/test_login_bdd.py` shows how the two patterns work together.
+
 1. **Contact email.** Go to the Contact page and verify that the student office email is shown on the page and that it is `student.office@example.com`.
 2. **Student ID.** Log in as `mario`, go to the Profile page and verify that the student ID is shown on the page and that it is `1000012345`.
