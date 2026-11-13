@@ -1,5 +1,3 @@
-import re
-
 from playwright.sync_api import Page, expect
 
 
@@ -20,4 +18,3 @@ def test_student_id(page: Page) -> None:
     student_id = page.get_by_test_id("profile-student-id")
     expect(student_id).to_be_visible()
     expect(student_id).to_have_text("1000012345")
-
