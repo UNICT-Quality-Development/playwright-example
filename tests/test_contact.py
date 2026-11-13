@@ -1,9 +1,13 @@
 from playwright.sync_api import Page, expect
+from pages.exams_page import ContactPage
 
 
 def test_contact_mail(page: Page) -> None:
+
+    contact_page= ContactPage(page)
+
     # act
-    page.goto("/contact")
+    ContactPage.goto()
 
     # assert
-    expect(page.get_by_test_id("contact-email")).to_have_text("student.office@example.com")
+    expect(page.contact_mail).to_have_text("student.office@example.com")
